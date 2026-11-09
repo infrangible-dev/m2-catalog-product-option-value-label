@@ -15,32 +15,27 @@ define([
             _applyOptionNodeFix: function applyOptionNodeFix(options) {
                 this._super(options);
 
-                var config = this.options;
+                const config = this.options;
 
                 options.filter('select').each(function (index, element) {
-                    var $element = $(element),
+                    const $element = $(element),
                         optionId = utils.findOptionId($element),
                         optionConfig = config.optionConfig && config.optionConfig[optionId];
 
                     $element.find('option').each(function (idx, option) {
-                        var $option,
-                            optionValue,
-                            prefix,
-                            suffix;
-
-                        $option = $(option);
-                        optionValue = $option.val();
+                        const $option = $(option);
+                        const optionValue = $option.val();
 
                         if (! optionValue && optionValue !== 0) {
                             return;
                         }
 
-                        prefix = optionConfig[optionValue] ? optionConfig[optionValue].prefix : null;
+                        const prefix = optionConfig[optionValue] ? optionConfig[optionValue].prefix : null;
                         if (prefix) {
                             $option.text(prefix + ' ' + $option.text());
                         }
 
-                        suffix = optionConfig[optionValue] ? optionConfig[optionValue].suffix : null;
+                        const suffix = optionConfig[optionValue] ? optionConfig[optionValue].suffix : null;
                         if (suffix) {
                             $option.text($option.text() + ' ' + suffix);
                         }
@@ -48,35 +43,29 @@ define([
                 });
 
                 options.filter(':radio,:checkbox').each(function(index, element) {
-                    var $element = $(element),
+                    const $element = $(element),
                         optionId = utils.findOptionId($element),
                         optionValue = $element.val(),
-                        optionConfig = config.optionConfig && config.optionConfig[optionId],
-                        $optionTitle,
-                        $optionPriceNotice,
-                        prefix,
-                        $optionPrefix,
-                        suffix,
-                        $optionSuffix;
+                        optionConfig = config.optionConfig && config.optionConfig[optionId];
 
                     if (! optionValue && optionValue !== 0) {
                         return;
                     }
 
-                    $optionTitle = $element.parent().find('label.label > span:first');
-                    $optionPriceNotice = $element.parent().find('label.label > span.price-notice');
+                    const $optionTitle = $element.parent().find('label.label > span:first');
+                    const $optionPriceNotice = $element.parent().find('label.label > span.price-notice');
 
-                    prefix = optionConfig[optionValue] ? optionConfig[optionValue].prefix : null;
+                    const prefix = optionConfig[optionValue] ? optionConfig[optionValue].prefix : null;
                     if (prefix) {
-                        $optionPrefix = $('<span>', {class: 'prefix'});
+                        const $optionPrefix = $('<span>', {class: 'prefix'});
                         $optionPrefix.text(prefix);
 
                         $optionTitle.before($optionPrefix);
                     }
 
-                    suffix = optionConfig[optionValue] ? optionConfig[optionValue].suffix : null;
+                    const suffix = optionConfig[optionValue] ? optionConfig[optionValue].suffix : null;
                     if (suffix) {
-                        $optionSuffix = $('<span>', {class: 'suffix'});
+                        const $optionSuffix = $('<span>', {class: 'suffix'});
                         $optionSuffix.text(suffix);
 
                         if ($optionPriceNotice.length > 0) {
